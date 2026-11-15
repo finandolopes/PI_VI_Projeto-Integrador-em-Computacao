@@ -1,0 +1,495 @@
+/* UI refinements for institutional landing page */
+
+:root {
+  --ui-primary: #0b5ed7;
+  --ui-primary-strong: #084298;
+  --ui-accent: #00a8d8;
+  --ui-surface: #ffffff;
+  --ui-surface-muted: #f4f7fb;
+  --ui-border: #dce4ef;
+  --ui-text: #1f2937;
+  --ui-text-muted: #5b6778;
+  --ui-shadow-sm: 0 10px 28px -20px rgba(15, 37, 70, 0.6);
+  --ui-shadow-md: 0 18px 44px -24px rgba(11, 94, 215, 0.48);
+}
+
+body.institutional-theme {
+  background: linear-gradient(180deg, #f7fbff 0%, #ffffff 260px);
+  color: var(--ui-text);
+}
+
+html {
+  scroll-padding-top: 96px;
+}
+
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+body.institutional-theme p {
+  color: var(--ui-text-muted);
+}
+
+/* ── Header glassmorphism (sobrescreve index-optimizado.css) ── */
+#header {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom: 1px solid rgba(220, 228, 239, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px -20px rgba(15, 37, 70, 0.55);
+}
+
+#header.header-scrolled {
+  background: rgba(255, 255, 255, 0.97) !important;
+  height: 72px;
+}
+
+#header .logo img {
+  max-height: 46px;
+}
+
+#header .navbar a,
+#header .navbar a:focus,
+#header .navbar button.nav-link {
+  color: #1d2b42;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+#header .navbar a:hover,
+#header .navbar .active,
+#header .navbar .active:focus,
+#header .navbar li:hover > a,
+#header .navbar button.nav-link:hover {
+  color: var(--ui-primary);
+}
+
+#header .navbar button.nav-link {
+  border: 0;
+  padding-left: 18px;
+  padding-right: 0;
+  background: transparent;
+}
+
+#hero {
+  margin-bottom: 12px;
+}
+
+#hero .carousel-item {
+  min-height: 78vh;
+}
+
+#hero .carousel-item::before {
+  background: linear-gradient(120deg, rgba(3, 18, 41, 0.76), rgba(7, 52, 109, 0.54));
+}
+
+/* Remove o ::after duplicado do index-optimizado dentro do hero */
+#hero .carousel-item::after {
+  display: none;
+}
+
+#hero .carousel-container .container {
+  max-width: 900px;
+}
+
+#hero .carousel-container p {
+  margin: 0 auto;
+  max-width: 820px;
+  font-family: "Poppins", "Open Sans", sans-serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.hero-actions {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hero-actions .btn {
+  min-width: 180px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 12px 24px;
+}
+
+.hero-actions .btn-primary {
+  background: linear-gradient(90deg, var(--ui-primary), #2d83f0);
+  border: 0;
+  box-shadow: var(--ui-shadow-md);
+}
+
+.hero-actions .btn-outline-light {
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+#sobre,
+#valores,
+#servicos,
+#simulacao-avancada,
+#requi,
+#analise-credito,
+#faq,
+#envdepoimentos,
+#depoimentos,
+#chegar {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.section-headline h2,
+.section-title h2 {
+  color: #0f2546;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.section-headline h2::after,
+.section-title h2::after {
+  border-color: rgba(11, 94, 215, 0.45);
+  width: 86px;
+}
+
+#sobre .section-headline {
+  background: #ffffff;
+  border: 1px solid var(--ui-border);
+  border-radius: 22px;
+  box-shadow: var(--ui-shadow-sm);
+  padding: 28px;
+}
+
+#valores .icon-box {
+  height: 100%;
+  border: 1px solid var(--ui-border);
+  border-radius: 20px;
+  box-shadow: var(--ui-shadow-sm);
+  background: #ffffff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#valores .icon-box:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--ui-shadow-md);
+}
+
+#valores .icon-box p {
+  text-align: left;
+}
+
+.services-area .single-services {
+  height: auto;
+  min-height: 320px;
+  border: 1px solid var(--ui-border);
+  border-radius: 20px;
+  box-shadow: var(--ui-shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.services-area .single-services:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ui-shadow-md);
+}
+
+.services-area .single-services p {
+  text-align: left;
+}
+
+#simulacao-avancada {
+  background: linear-gradient(180deg, #f4f8ff 0%, #edf4ff 100%);
+}
+
+#requi .formulario-modal {
+  background: #ffffff;
+  border: 1px solid var(--ui-border);
+  border-radius: 20px;
+  box-shadow: var(--ui-shadow-sm);
+  padding: 28px;
+}
+
+#requi .form-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+#requi .form-step {
+  background: #eef4ff;
+  border: 1px solid #d7e4fb;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+#requi .form-step.is-active {
+  background: #deebff;
+  border-color: #c4d9fb;
+}
+
+#requi .step-index {
+  background: var(--ui-primary);
+}
+
+#requi .form-control,
+#requi textarea,
+#requi input[type="time"],
+#requi input[type="text"],
+#requi input[type="email"],
+#requi input[type="tel"] {
+  border: 1px solid #cfd9e7;
+  border-radius: 10px;
+  min-height: 46px;
+}
+
+#requi .btn-primary {
+  min-width: 220px;
+  border-radius: 999px;
+  padding-inline: 28px;
+}
+
+#analise-credito .section-title {
+  background: linear-gradient(140deg, #f2f7ff, #e5f0ff);
+  border: 1px solid #d2e1f8;
+  border-radius: 22px;
+  padding: 24px;
+}
+
+#modalOverlay {
+  backdrop-filter: blur(4px);
+}
+
+#modalSimulacao {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #d7e1ef;
+  box-shadow: 0 30px 70px -30px rgba(15, 37, 70, 0.55);
+  max-width: 620px;
+  width: calc(100% - 1.5rem);
+  padding: 24px;
+}
+
+#faq .faq-list li {
+  border-radius: 14px;
+  border-color: #dae4f2;
+}
+
+#envdepoimentos #form-depoimento {
+  border: 1px solid var(--ui-border);
+  border-radius: 18px;
+  box-shadow: var(--ui-shadow-sm);
+  background: #ffffff;
+}
+
+#depoimentos .testimonial-item {
+  border: 1px solid var(--ui-border);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--ui-shadow-sm);
+  padding: 18px;
+}
+
+#chegar .contact-map {
+  border: 1px solid var(--ui-border);
+  border-radius: 16px;
+  box-shadow: var(--ui-shadow-sm);
+}
+
+.footer-address {
+  margin: 0 0 12px;
+  font-style: normal;
+}
+
+/* ── Footer (sobrescreve footer genérico do index-optimizado) ── */
+#footer {
+  background: #0e1b33 !important;
+  padding: 0;
+  margin-top: 0;
+}
+
+#footer .footer-top {
+  padding: 20px 0;
+}
+
+#footer .copyright,
+#footer .credits {
+  color: #d7dff0;
+}
+
+#footer a {
+  color: #7fd0ff;
+}
+
+.back-to-top {
+  border-radius: 999px;
+  box-shadow: var(--ui-shadow-md);
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(180deg, var(--ui-primary), var(--ui-primary-strong));
+}
+
+/* Accessibility menu compact refinements */
+#accessibilityMenu.accessibility-menu {
+  width: min(280px, calc(100vw - 16px)) !important;
+  max-height: 78vh !important;
+  top: 11% !important;
+  border-radius: 14px 0 0 14px !important;
+  padding: 14px !important;
+  transform: translateX(calc(100% + 8px)) !important;
+  transition: transform 0.28s ease !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin;
+}
+
+#accessibilityMenu.accessibility-menu.hidden {
+  transform: translateX(0) !important;
+}
+
+#accessibilityMenu.accessibility-menu .btn#menuDensityToggle {
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  padding-inline: 0.7rem !important;
+}
+
+#accessibilityMenu.accessibility-menu.density-compact {
+  width: min(248px, calc(100vw - 10px)) !important;
+  max-height: 70vh !important;
+  padding: 10px !important;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+}
+
+#accessibilityMenu.accessibility-menu.density-compact .card-body {
+  padding: 8px !important;
+}
+
+#accessibilityMenu.accessibility-menu.density-compact .container-fluid {
+  transform: scale(0.84);
+  transform-origin: top center;
+  width: 118%;
+  margin-left: -9%;
+}
+
+#accessibilityMenu.accessibility-menu.density-comfortable {
+  width: min(360px, calc(100vw - 16px)) !important;
+  max-height: 84vh !important;
+  padding: 18px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+#accessibilityMenu.accessibility-menu.density-comfortable .card-body {
+  padding: 14px !important;
+}
+
+#accessibilityMenu.accessibility-menu.density-comfortable .card-title {
+  font-size: 1.05rem !important;
+}
+
+#accessibilityMenu.accessibility-menu.density-comfortable .icon-button i {
+  font-size: 1.45rem !important;
+}
+
+#accessibilityMenu.accessibility-menu.density-comfortable .icon-label {
+  font-size: 0.82rem !important;
+}
+
+#accessibilityMenu.accessibility-menu.density-comfortable .btn {
+  font-size: 0.84rem !important;
+  padding: 0.45rem 0.7rem !important;
+}
+
+#accessibilityMenu .card {
+  margin-bottom: 10px !important;
+}
+
+#accessibilityMenu .card-body {
+  padding: 10px !important;
+}
+
+#accessibilityMenu .card-title {
+  font-size: 0.98rem !important;
+  margin-bottom: 8px !important;
+}
+
+#accessibilityMenu .icon-button i {
+  font-size: 1.15rem !important;
+}
+
+#accessibilityMenu .icon-label {
+  font-size: 0.73rem !important;
+  line-height: 1.2;
+  margin-top: 4px;
+}
+
+#accessibilityMenu .btn {
+  font-size: 0.78rem !important;
+  padding: 0.35rem 0.55rem !important;
+}
+
+.fixed-accessibility-button {
+  width: 52px !important;
+  height: 52px !important;
+  left: 8px !important;
+  border-width: 2px !important;
+}
+
+.fixed-accessibility-button .accessibility-icon {
+  width: 23px !important;
+  height: 23px !important;
+}
+
+.fixed-accessibility-button .accessibility-icon i {
+  font-size: 1rem !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 991px) {
+  #header .navbar-mobile ul {
+    border-radius: 14px;
+  }
+
+  #requi .form-steps {
+    grid-template-columns: 1fr;
+  }
+
+  #hero .carousel-item {
+    min-height: 68vh;
+  }
+
+  #accessibilityMenu.accessibility-menu {
+    width: min(236px, calc(100vw - 8px)) !important;
+    max-height: 68vh !important;
+  }
+
+  #accessibilityMenu.accessibility-menu.density-comfortable {
+    width: min(300px, calc(100vw - 8px)) !important;
+    max-height: 80vh !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #sobre,
+  #valores,
+  #servicos,
+  #simulacao-avancada,
+  #requi,
+  #analise-credito,
+  #faq,
+  #envdepoimentos,
+  #depoimentos,
+  #chegar {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  #requi .formulario-modal {
+    padding: 20px;
+  }
+
+  .fixed-accessibility-button {
+    width: 46px !important;
+    height: 46px !important;
+  }
+}

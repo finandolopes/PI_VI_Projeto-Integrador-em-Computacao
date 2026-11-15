@@ -1,0 +1,43 @@
+# Configurações locais e credenciais
+.env
+.env.*
+!.env.example
+config.php
+config.*.php
+php/conexao.local.php
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+# Dados reais, exportações e arquivos temporários
+uploads/
+assets/uploads/
+admin/assets/img/uploads/
+logs/
+cache/
+sessions/
+backups/
+backup/
+*.log
+*.bak
+*.old
+*.tmp
+*.zip
+*.rar
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+# Dependências e ferramentas
+vendor/
+node_modules/
+__pycache__/
+.venv/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+# Migrações SQL fazem parte do projeto — NÃO ignorar *.sql
+# Atenção: backups SQL com dados reais não podem ser versionados

@@ -1,0 +1,24 @@
+/* Cena artística específica por serviço: aditiva, preservando estrutura PHP */
+.hero .inner{isolation:isolate}.hero-copy{position:relative;z-index:8}.hero-copy h1{position:relative;z-index:9;text-shadow:0 3px 24px rgba(0,18,42,.5)}
+.hero .scene{isolation:isolate}.scribble-three{position:absolute;inset:-8% -12%;z-index:5;pointer-events:none;opacity:1;transition:opacity .55s}
+.scribble-three canvas{width:100%!important;height:100%!important;display:block}.hero .credit-card{z-index:3;opacity:.21;filter:blur(1px)}
+.hero[data-service3d=protecao] .credit-card,.hero[data-service3d=atendimento] .credit-card{opacity:0;pointer-events:none}
+.hero .float-tag{z-index:7}.service-object-name{position:absolute;z-index:10;right:6%;bottom:96px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#c7f0ff;background:rgba(0,43,78,.58);border:1px solid #7ccaf57a;padding:10px 17px;border-radius:999px;backdrop-filter:blur(10px)}
+.wireframe-toggle{position:absolute;right:24px;bottom:24px;z-index:12;color:#e7f6ff;background:#052c58e6;border:1px solid #9cdaed7a;border-radius:999px;padding:10px 15px;font-size:12px;font-weight:800;cursor:pointer}.wireframe-toggle:focus-visible{outline:3px solid #ffcd50;outline-offset:3px}
+@media(max-width:780px){.scribble-three{inset:-5% -8%;opacity:.9}.wireframe-toggle{right:13px;bottom:65px}.service-object-name{right:7%;bottom:118px}}
+@media(prefers-reduced-motion:reduce){.scribble-three,.service-object-name,.wireframe-toggle{display:none!important}}
+
+/* Cinematic depth remains inside homepage; never applied to admin pages. */
+.hero .inner{perspective:1200px}
+.hero-copy h1{max-width:12ch;line-height:1.06;letter-spacing:-.035em;text-wrap:balance}
+.hero-copy{transform:translateZ(0)}
+.hero .scene{transform-style:preserve-3d}
+.hero .scribble-three{mix-blend-mode:screen}
+@media(max-width:600px){
+ .hero-copy h1{font-size:clamp(2rem,9vw,3.3rem);max-width:100%}
+ .hero-actions .pill{min-height:44px}
+ .hero .scribble-three{opacity:.56;filter:none}
+ .service-object-name{font-size:10px;bottom:145px;max-width:45vw;text-align:center}
+ .wireframe-toggle{min-height:44px;max-width:48vw;white-space:normal}
+}
+@media(prefers-reduced-motion:reduce){.hero .scribble-three{display:none!important}}

@@ -1,0 +1,323 @@
+<!-- Accessibility Enhancements for CONFINTER -->
+<!-- Include this at the end of <head> in index.php and admin files -->
+
+<meta name="description" content="CONFINTER - Sistema de Análise e Visualização de Dados com conformidade WCAG 2.1 AA">
+<meta name="theme-color" content="#1a73e8">
+<meta name="color-scheme" content="light dark">
+
+<!-- Skip to main content link (for keyboard navigation) -->
+<style>
+    .skip-to-main {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #1a73e8;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        z-index: 100;
+        border-radius: 0 0 4px 0;
+    }
+    
+    .skip-to-main:focus {
+        top: 0;
+    }
+    
+    /* Accessibility: Focus visible */
+    *:focus-visible {
+        outline: 2px solid #1a73e8;
+        outline-offset: 2px;
+    }
+    
+    /* Accessibility: Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+    
+    /* Accessibility: High contrast mode support */
+    @media (prefers-contrast: more) {
+        body {
+            font-weight: 600;
+        }
+        
+        button, a {
+            text-decoration: underline;
+        }
+    }
+    
+    /* Accessibility: Font size preference */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            color-scheme: dark;
+        }
+    }
+    
+    /* Accessibility: Improve text readability */
+    body {
+        line-height: 1.6;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Accessibility: Better contrast for text */
+    .text-muted {
+        color: #666 !important;
+    }
+    
+    /* Accessibility: Ensure minimum touch target size */
+    button, a, input[type="checkbox"], input[type="radio"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Accessibility: Visible focus for keyboard navigation */
+    a:focus, button:focus, input:focus, select:focus, textarea:focus {
+        outline: 3px solid #1a73e8;
+        outline-offset: 2px;
+    }
+    
+    /* Accessibility: Better color contrast ratios */
+    .btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .btn-primary {
+        background-color: #1a73e8;
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background-color: #1558c0;
+    }
+    
+    /* Accessibility: Semantic headings */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        line-height: 1.4;
+    }
+</style>
+
+<a href="#main-content" class="skip-to-main">Pular para conteúdo principal</a>
+
+<script>
+/**
+ * Accessibility Enhancements
+ */
+
+// 1. Manage focus for modals
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        // Close any open modals
+        const modals = document.querySelectorAll('[role="dialog"]');
+        modals.forEach(modal => {
+            if (modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            }
+        });
+    }
+    
+    // Tab navigation in modals
+    if (e.key === 'Tab') {
+        const activeModal = document.querySelector('[role="dialog"].active');
+        if (activeModal) {
+            const focusableElements = activeModal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            
+            if (focusableElements.length > 0) {
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+                const activeElement = document.activeElement;
+                
+                if (e.shiftKey && activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                } else if (!e.shiftKey && activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        }
+    }
+});
+
+// 2. Announce dynamic content changes
+class AccessibilityAnnouncer {
+    constructor() {
+        this.liveRegion = null;
+        this.init();
+    }
+    
+    init() {
+        // Create live region for announcements
+        if (!document.getElementById('a11y-live-region')) {
+            const liveRegion = document.createElement('div');
+            liveRegion.id = 'a11y-live-region';
+            liveRegion.setAttribute('aria-live', 'polite');
+            liveRegion.setAttribute('aria-atomic', 'true');
+            liveRegion.style.position = 'absolute';
+            liveRegion.style.left = '-10000px';
+            liveRegion.style.width = '1px';
+            liveRegion.style.height = '1px';
+            liveRegion.style.overflow = 'hidden';
+            document.body.appendChild(liveRegion);
+            this.liveRegion = liveRegion;
+        }
+    }
+    
+    announce(message, priority = 'polite') {
+        if (this.liveRegion) {
+            this.liveRegion.setAttribute('aria-live', priority);
+            this.liveRegion.textContent = message;
+        }
+    }
+}
+
+const announcer = new AccessibilityAnnouncer();
+
+// 3. Enhance form validation for accessibility
+document.addEventListener('invalid', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+        e.preventDefault();
+        
+        const errorId = e.target.id + '-error';
+        let errorElement = document.getElementById(errorId);
+        
+        if (!errorElement) {
+            errorElement = document.createElement('div');
+            errorElement.id = errorId;
+            errorElement.setAttribute('role', 'alert');
+            errorElement.className = 'invalid-feedback d-block';
+            e.target.parentNode.insertBefore(errorElement, e.target.nextSibling);
+        }
+        
+        // Gerar mensagem de validação apropriada
+        let message = 'Campo inválido';
+        
+        if (e.target.type === 'email' && !e.target.validity.valid) {
+            message = 'Por favor, insira um endereço de email válido';
+        } else if (e.target.type === 'tel') {
+            message = 'Por favor, insira um telefone válido';
+        } else if (e.target.validity.valueMissing) {
+            message = `${e.target.getAttribute('aria-label') || e.target.name} é obrigatório`;
+        } else if (e.target.validity.tooShort) {
+            message = `Mínimo de ${e.target.minLength} caracteres`;
+        } else if (e.target.validity.tooLong) {
+            message = `Máximo de ${e.target.maxLength} caracteres`;
+        }
+        
+        errorElement.textContent = message;
+        e.target.setAttribute('aria-invalid', 'true');
+        e.target.setAttribute('aria-describedby', errorId);
+        
+        announcer.announce(message, 'assertive');
+    }
+}, true);
+
+// 4. Improve page structure with semantic HTML
+window.AccessibilityTools = {
+    announcer: announcer,
+    
+    /**
+     * Adicionar atributos ARIA apropriados
+     */
+    enhanceElement: function(selector, ariaLabel, ariaDescription) {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            if (ariaLabel && !el.getAttribute('aria-label')) {
+                el.setAttribute('aria-label', ariaLabel);
+            }
+            if (ariaDescription && !el.getAttribute('aria-describedby')) {
+                el.setAttribute('aria-describedby', ariaDescription);
+            }
+        });
+    },
+    
+    /**
+     * Verificar contrastes de cores
+     */
+    checkContrast: function(foreground, background) {
+        const fgColor = this.hexToRgb(foreground);
+        const bgColor = this.hexToRgb(background);
+        
+        const fgLuminance = this.getLuminance(fgColor);
+        const bgLuminance = this.getLuminance(bgColor);
+        
+        const lighter = Math.max(fgLuminance, bgLuminance);
+        const darker = Math.min(fgLuminance, bgLuminance);
+        
+        return (lighter + 0.05) / (darker + 0.05);
+    },
+    
+    hexToRgb: function(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    },
+    
+    getLuminance: function(rgb) {
+        const r = rgb.r / 255;
+        const g = rgb.g / 255;
+        const b = rgb.b / 255;
+        
+        return 0.299 * r + 0.587 * g + 0.114 * b;
+    },
+    
+    /**
+     * Verificar se contrastes estão OK para WCAG AA
+     * Requer 4.5:1 para texto normal, 3:1 para texto grande
+     */
+    isContrastOK: function(foreground, background, isLargeText = false) {
+        const ratio = this.checkContrast(foreground, background);
+        const minRatio = isLargeText ? 3 : 4.5;
+        return ratio >= minRatio;
+    }
+};
+
+// 5. Auto-enhance common elements
+document.addEventListener('DOMContentLoaded', function() {
+    // Adicionar role="main" ao conteúdo principal
+    const mainContent = document.querySelector('main') || document.querySelector('[role="main"]');
+    if (!mainContent) {
+        const content = document.querySelector('.container-fluid, .container, main, [role="main"]');
+        if (content) {
+            content.setAttribute('role', 'main');
+            content.id = 'main-content';
+        }
+    }
+    
+    // Adicionar aria-label a ícones sem texto
+    document.querySelectorAll('i[class*="bx"], i[class*="fa"], i[class*="icon"]').forEach(icon => {
+        if (!icon.getAttribute('aria-label') && !icon.closest('a, button, [role]').getAttribute('aria-label')) {
+            // Try to infer label from class
+            const classes = icon.className;
+            let label = 'Ícone';
+            
+            if (classes.includes('menu')) label = 'Menu';
+            else if (classes.includes('search')) label = 'Buscar';
+            else if (classes.includes('user')) label = 'Usuário';
+            else if (classes.includes('close') || classes.includes('remove')) label = 'Fechar';
+            else if (classes.includes('check')) label = 'Confirmar';
+            
+            icon.setAttribute('aria-label', label);
+        }
+    });
+    
+    // Melhorar contraste de texto mutado
+    document.querySelectorAll('.text-muted, .text-secondary').forEach(el => {
+        el.style.color = '#666';
+    });
+    
+    console.log('✅ Acessibilidade aprimorada - WCAG 2.1 AA');
+});
+
+// Export para uso
+window.Accessibility = window.AccessibilityTools;
+</script>

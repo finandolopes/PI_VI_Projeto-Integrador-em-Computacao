@@ -1,0 +1,36 @@
+/* CONFINTER Design System 2026 – progressive refinement, keeping original brand */
+:root{--cf-navy:#092849;--cf-blue:#155b9b;--cf-sky:#d9edf8;--cf-gold:#dfae49;--cf-ink:#152b42;--cf-muted:#607389;--cf-radius:14px;--cf-shadow:0 14px 34px rgba(9,40,73,.09)}
+html{scroll-behavior:smooth}body{overflow-x:clip}
+:where(button,a,input,textarea,select):focus-visible{outline:3px solid #e6ac36!important;outline-offset:3px!important}
+:where(button,input,select,textarea){font:inherit}
+.section h2{max-width:19ch;letter-spacing:-.035em;line-height:1.08}
+.section p{line-height:1.7}
+.hero .inner{position:relative;z-index:2}
+.hero .hero-copy{position:relative;z-index:3}
+.hero .scene{position:relative;z-index:2}
+.hero .hero-copy h1{letter-spacing:-.045em;text-wrap:balance;line-height:1.06}
+.hero .hero-actions a,.hero .hero-actions button{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+.services .grid,.values .grid{align-items:stretch}
+.services .tile,.values .tile{position:relative;overflow:hidden;border-radius:var(--cf-radius);box-shadow:var(--cf-shadow);transition:box-shadow .25s ease,border-color .25s ease}
+.services .tile:hover,.values .tile:hover{box-shadow:0 22px 52px rgba(9,40,73,.16)}
+.services .tile:nth-child(even){transform-origin:60% 30%}
+.section:nth-of-type(even):not(.hero){background-image:linear-gradient(170deg,rgba(255,255,255,.025),rgba(27,100,159,.045))}
+.form-panel input,.form-panel select,.form-panel textarea{min-height:44px}
+.form-panel textarea{min-height:105px}
+:where(.nav a,.social a){transition:background .18s ease,box-shadow .18s ease,transform .18s ease}
+.nav a:hover{transform:translateY(-1px)}.social a{min-width:44px;min-height:44px;display:grid;place-items:center}
+/* Do not hide content when scripts, WebGL or GSAP are unavailable */
+.section,.tile,.form-panel{opacity:1}
+@media(max-width:650px){
+ .hero .inner{padding-top:70px!important;padding-bottom:52px!important}
+ .hero .hero-copy h1{font-size:clamp(2rem,10vw,3rem)!important;max-width:13ch}
+ .hero .scene{max-height:380px}
+ .services .grid,.values .grid{grid-template-columns:1fr!important}
+ .hero .hero-actions{gap:10px;flex-wrap:wrap}
+ .hero .hero-actions a{max-width:100%;min-height:44px}
+ .section h2{font-size:clamp(1.8rem,7vw,2.7rem)!important}
+ .social{bottom:18px!important;top:auto!important;right:10px!important;left:auto!important;transform:none!important}
+ .social a{width:44px;height:44px}
+ .form-panel{max-width:100%;min-width:0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

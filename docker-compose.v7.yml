@@ -1,0 +1,31 @@
+services:
+  web:
+    build: .
+    ports:
+      - "${APP_HTTP_PORT:-8080}:80"
+    env_file: .env
+    environment:
+      DB_HOST: db
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: ${DB_NAME:-confinter}
+      MARIADB_USER: ${DB_USER:-confinter_app}
+      MARIADB_PASSWORD: ${DB_PASS:?Configure DB_PASS}
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Configure MYSQL_ROOT_PASSWORD}
+    volumes:
+      - v7_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "healthcheck.sh --connect --innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+    restart: unless-stopped
+volumes:
+  v7_db:

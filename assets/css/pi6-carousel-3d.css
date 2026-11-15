@@ -1,0 +1,30 @@
+/* CONFINTER | Cinematic Carousel 3D — progressive enhancement for existing Bootstrap carousel.
+   Original images, captions, indicators and navigation remain database-driven. */
+#heroCarousel.pi6-cinematic{--c3x:0deg;--c3y:0deg;--c3dx:0px;--c3dy:0px;--c3-duration:5000ms;position:relative;isolation:isolate;overflow:hidden;background:#05162e;perspective:1200px}
+#heroCarousel.pi6-cinematic .carousel-inner{overflow:hidden;isolation:isolate}
+/* JS copies each item's existing background into a CSS custom property; without JS original image displays as before. */
+#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-item{position:relative;overflow:hidden;transform-style:preserve-3d;isolation:isolate;background-image:none!important}
+#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-item::before{content:"";position:absolute;inset:-5%;z-index:-2;background-image:var(--c3-bg);background-size:cover;background-position:center;transform:scale(1.09) rotateX(var(--c3x)) rotateY(var(--c3y)) translate3d(var(--c3dx),var(--c3dy),0);transition:transform 1s cubic-bezier(.22,1,.36,1),filter .85s ease;filter:saturate(1.06);will-change:transform;pointer-events:none}
+#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-item::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,rgba(1,10,28,.77) 0%,rgba(1,20,46,.43) 50%,rgba(0,14,35,.46) 100%),radial-gradient(circle at 82% 32%,rgba(54,179,245,.21),transparent 44%);pointer-events:none}
+#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-item.active::before{animation:c3-kenburns 8.5s ease-out both}
+@keyframes c3-kenburns{from{transform:scale(1.16) translate3d(-1%,0,0)}to{transform:scale(1.055) translate3d(1%,0,0)}}
+#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-container{position:relative;z-index:1;perspective:900px;padding:5rem 2rem}
+#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-container .container{max-width:1000px;transform-style:preserve-3d}
+#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-container p{font-size:clamp(1.7rem,4.8vw,4.5rem);line-height:1.13;letter-spacing:-.025em;text-shadow:0 10px 40px #0008;max-width:850px;margin-inline:auto}
+#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-item.active .carousel-container p{animation:c3-caption .85s cubic-bezier(.2,.9,.26,1) both}
+@keyframes c3-caption{from{opacity:0;transform:translate3d(0,38px,-75px) rotateX(10deg);filter:blur(6px)}to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
+#heroCarousel.pi6-cinematic .carousel-control-prev,#heroCarousel.pi6-cinematic .carousel-control-next{z-index:7;width:8%;min-width:46px;transition:opacity .25s ease}
+#heroCarousel.pi6-cinematic .carousel-control-prev:focus-visible,#heroCarousel.pi6-cinematic .carousel-control-next:focus-visible,#heroCarousel.pi6-cinematic .carousel-indicators [data-bs-slide-to]:focus-visible{outline:3px solid #9defff;outline-offset:5px}
+#heroCarousel.pi6-cinematic .carousel-indicators{z-index:8;bottom:30px;gap:9px;align-items:center}
+#heroCarousel.pi6-cinematic .carousel-indicators [data-bs-slide-to]{width:24px;height:5px;border:0;border-radius:99px;opacity:.55;background:#d8f6ff;transition:width .4s,opacity .4s,background .4s;cursor:pointer}
+#heroCarousel.pi6-cinematic .carousel-indicators .active{width:48px;opacity:1;background:#7bddff}
+#heroCarousel.pi6-cinematic .pi6-c-progress{position:absolute;inset:auto 0 0;height:4px;background:#95e8ff24;z-index:9;pointer-events:none}
+#heroCarousel.pi6-cinematic .pi6-c-progress>span{display:block;width:0;height:100%;background:linear-gradient(90deg,#33bfff,#9af4ff);transform-origin:left center;box-shadow:0 0 18px #60cfff88}
+#heroCarousel.pi6-cinematic.pi6-c-playing .pi6-c-progress>span{animation:c3-progress var(--c3-duration) linear both}
+@keyframes c3-progress{from{width:0}to{width:100%}}
+#heroCarousel.pi6-cinematic.pi6-c-paused .pi6-c-progress>span{animation-play-state:paused}
+/* Subtle decorative glass caption frame. No controls overlay, no lost clicks. */
+#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-container .container{border:1px solid #ffffff25;border-radius:26px;background:linear-gradient(110deg,#122d4a25,#306cae10);backdrop-filter:blur(2px);box-shadow:0 18px 65px #010d2840;padding:clamp(1.25rem,3vw,3rem)}
+@media(hover:hover) and (pointer:fine){#heroCarousel.pi6-cinematic.pi6-c-interactive .carousel-item.active::before{animation:none;transform:scale(1.095) rotateX(var(--c3x)) rotateY(var(--c3y)) translate3d(var(--c3dx),var(--c3dy),0)}}
+@media(max-width:767px){#heroCarousel.pi6-cinematic .carousel-item{height:min(78svh,740px);min-height:480px}#heroCarousel.pi6-cinematic .carousel-indicators{bottom:17px}#heroCarousel.pi6-cinematic .carousel-control-prev,#heroCarousel.pi6-cinematic .carousel-control-next{width:12%}#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-container{padding:4rem 2.2rem}#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-container p{font-size:clamp(1.65rem,6vw,2.8rem)}}
+@media(prefers-reduced-motion:reduce){#heroCarousel.pi6-cinematic *,#heroCarousel.pi6-cinematic *::before,#heroCarousel.pi6-cinematic *::after{animation:none!important;transition:none!important}#heroCarousel.pi6-cinematic.pi6-c-ready .carousel-item::before{transform:scale(1.02)!important}#heroCarousel.pi6-cinematic .pi6-c-progress{display:none}}

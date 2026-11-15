@@ -1,0 +1,14 @@
+/* CONFINTER Service Desk: consistent operational UI without 3D */
+:root{--sd-primary:#17589a;--sd-ink:#183550;--sd-border:#dae5ef}
+.sd-wrap{max-width:1450px}.sd-wrap h1{letter-spacing:-.035em;color:var(--sd-ink)}
+.sd-card{border:1px solid var(--sd-border);border-radius:14px;box-shadow:0 4px 18px rgba(9,40,73,.045)}
+.sd-metrics{gap:14px}.sd-metrics article{border:1px solid var(--sd-border);border-radius:12px}
+.sd-card select,.sd-card input,.sd-card textarea{border:1px solid #cbd8e5;border-radius:7px;min-height:42px}
+.sd-card button{min-height:42px;border-radius:7px;cursor:pointer}
+.sd-card button:focus-visible,.sd-card :is(a,input,select,textarea):focus-visible{outline:3px solid #e1aa39;outline-offset:2px}
+.sd-table-scroll{overflow:auto;max-width:100%}.sd-table-scroll table{min-width:760px}
+.sd-table-scroll th{background:#eff5f9;color:#234666;position:sticky;top:0}
+.sd-table-scroll td{vertical-align:top;line-height:1.5}
+.sd-card form{max-width:100%}
+@media(max-width:650px){.sd-wrap{padding:20px 14px}.sd-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}.sd-card{padding:16px!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

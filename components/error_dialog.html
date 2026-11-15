@@ -1,0 +1,511 @@
+<!-- App Error Dialog Component -->
+<!-- Inclua este arquivo em index.php e admin.php -->
+
+<style>
+    .error-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 10001;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.2s ease-in;
+    }
+    
+    .error-modal.active {
+        display: flex;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .error-modal-content {
+        background: white;
+        border-radius: 8px;
+        padding: 0;
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .error-modal-header {
+        padding: 20px;
+        border-bottom: 3px solid #dc3545;
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .error-modal-header.warning {
+        border-bottom-color: #ffc107;
+        background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+    }
+    
+    .error-modal-header.info {
+        border-bottom-color: #17a2b8;
+        background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    }
+    
+    .error-modal-header.success {
+        border-bottom-color: #28a745;
+        background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    }
+    
+    .error-icon {
+        font-size: 24px;
+    }
+    
+    .error-modal-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .error-modal-body {
+        padding: 20px;
+    }
+    
+    .error-message {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #333;
+        margin-bottom: 16px;
+    }
+    
+    .error-details {
+        background: #f8f9fa;
+        border-left: 3px solid #dc3545;
+        padding: 12px;
+        border-radius: 4px;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        font-size: 12px;
+        color: #555;
+        max-height: 200px;
+        overflow-y: auto;
+        margin-bottom: 16px;
+        display: none;
+    }
+    
+    .error-details.show {
+        display: block;
+    }
+    
+    .error-details-toggle {
+        color: #17a2b8;
+        text-decoration: none;
+        font-size: 12px;
+        cursor: pointer;
+        margin-bottom: 12px;
+        display: inline-block;
+    }
+    
+    .error-details-toggle:hover {
+        text-decoration: underline;
+    }
+    
+    .error-modal-footer {
+        display: flex;
+        gap: 10px;
+        padding: 16px 20px;
+        border-top: 1px solid #eee;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+    
+    .error-modal-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .error-modal-btn-primary {
+        background: #dc3545;
+        color: white;
+    }
+    
+    .error-modal-btn-primary:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+    }
+    
+    .error-modal-btn-secondary {
+        background: #6c757d;
+        color: white;
+    }
+    
+    .error-modal-btn-secondary:hover {
+        background: #5a6268;
+    }
+    
+    .error-modal-btn-tertiary {
+        background: #f0f0f0;
+        color: #333;
+    }
+    
+    .error-modal-btn-tertiary:hover {
+        background: #e0e0e0;
+    }
+    
+    /* Alert inline (sem modal) */
+    .alert-inline {
+        padding: 16px;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        animation: slideInDown 0.3s ease-out;
+    }
+    
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .alert-inline.danger {
+        background: #f8d7da;
+        color: #721c24;
+        border-left: 3px solid #dc3545;
+    }
+    
+    .alert-inline.warning {
+        background: #fff3cd;
+        color: #856404;
+        border-left: 3px solid #ffc107;
+    }
+    
+    .alert-inline.info {
+        background: #d1ecf1;
+        color: #0c5460;
+        border-left: 3px solid #17a2b8;
+    }
+    
+    .alert-inline.success {
+        background: #d4edda;
+        color: #155724;
+        border-left: 3px solid #28a745;
+    }
+    
+    .alert-close {
+        background: none;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        font-size: 18px;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+    }
+    
+    .alert-close:hover {
+        opacity: 1;
+    }
+</style>
+
+<!-- Modal de Erro -->
+<div id="errorModal" class="error-modal" role="dialog" aria-labelledby="errorModalTitle" aria-modal="true">
+    <div class="error-modal-content">
+        <div class="error-modal-header" id="errorModalHeader">
+            <span class="error-icon" id="errorModalIcon">⚠️</span>
+            <h2 class="error-modal-title" id="errorModalTitle">Ocorreu um Erro</h2>
+        </div>
+        
+        <div class="error-modal-body">
+            <div class="error-message" id="errorMessage"></div>
+            <a href="#" class="error-details-toggle" id="errorDetailsToggle">Mostrar detalhes técnicos</a>
+            <div class="error-details" id="errorDetails"></div>
+        </div>
+        
+        <div class="error-modal-footer">
+            <button class="error-modal-btn error-modal-btn-tertiary" id="errorModalClose" aria-label="Fechar modal">Fechar</button>
+            <button class="error-modal-btn error-modal-btn-secondary" id="errorModalReport" style="display: none;" aria-label="Reportar erro">Reportar Erro</button>
+            <button class="error-modal-btn error-modal-btn-primary" id="errorModalAction" style="display: none;" aria-label="Ação recomendada">Ação</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/**
+ * App Error Dialog - Gerenciador de erros profissional
+ */
+(function() {
+    'use strict';
+    
+    const ErrorDialog = {
+        elements: {
+            modal: document.getElementById('errorModal'),
+            header: document.getElementById('errorModalHeader'),
+            icon: document.getElementById('errorModalIcon'),
+            title: document.getElementById('errorModalTitle'),
+            message: document.getElementById('errorMessage'),
+            details: document.getElementById('errorDetails'),
+            detailsToggle: document.getElementById('errorDetailsToggle'),
+            closeBtn: document.getElementById('errorModalClose'),
+            reportBtn: document.getElementById('errorModalReport'),
+            actionBtn: document.getElementById('errorModalAction')
+        },
+        
+        // Mapa de tipos de erro
+        errorTypes: {
+            'error': {
+                icon: '❌',
+                title: 'Erro',
+                class: 'error'
+            },
+            'warning': {
+                icon: '⚠️',
+                title: 'Aviso',
+                class: 'warning'
+            },
+            'info': {
+                icon: 'ℹ️',
+                title: 'Informação',
+                class: 'info'
+            },
+            'success': {
+                icon: '✅',
+                title: 'Sucesso',
+                class: 'success'
+            },
+            'network': {
+                icon: '🌐',
+                title: 'Erro de Conexão',
+                class: 'error'
+            },
+            'validation': {
+                icon: '✗',
+                title: 'Erro de Validação',
+                class: 'error'
+            },
+            'permission': {
+                icon: '🔒',
+                title: 'Acesso Negado',
+                class: 'error'
+            },
+            'notfound': {
+                icon: '🔍',
+                title: 'Não Encontrado',
+                class: 'warning'
+            }
+        },
+        
+        /**
+         * Mostrar modal de erro
+         */
+        show: function(options) {
+            options = options || {};
+            
+            const type = options.type || 'error';
+            const errorInfo = this.errorTypes[type] || this.errorTypes['error'];
+            
+            // Atualizar header
+            this.elements.header.className = 'error-modal-header ' + errorInfo.class;
+            this.elements.icon.textContent = errorInfo.icon;
+            this.elements.title.textContent = options.title || errorInfo.title;
+            
+            // Atualizar mensagem (sem dados sensíveis)
+            const userMessage = this.getSafeMessage(options.message, type);
+            this.elements.message.textContent = userMessage;
+            
+            // Detalhes técnicos (apenas em desenvolvimento)
+            if (options.details && this.isDevelopment()) {
+                this.elements.details.textContent = this.formatDetails(options.details);
+                this.elements.detailsToggle.style.display = 'block';
+            } else {
+                this.elements.detailsToggle.style.display = 'none';
+                this.elements.details.classList.remove('show');
+            }
+            
+            // Ações
+            if (options.onReport) {
+                this.elements.reportBtn.style.display = 'inline-block';
+                this.elements.reportBtn.onclick = () => options.onReport();
+            } else {
+                this.elements.reportBtn.style.display = 'none';
+            }
+            
+            if (options.actionText && options.onAction) {
+                this.elements.actionBtn.style.display = 'inline-block';
+                this.elements.actionBtn.textContent = options.actionText;
+                this.elements.actionBtn.onclick = () => options.onAction();
+            } else {
+                this.elements.actionBtn.style.display = 'none';
+            }
+            
+            // Log para auditoria
+            this.logError(options, type);
+            
+            // Mostrar modal
+            this.elements.modal.classList.add('active');
+            this.elements.closeBtn.focus();
+        },
+        
+        /**
+         * Fechar modal
+         */
+        close: function() {
+            this.elements.modal.classList.remove('active');
+        },
+        
+        /**
+         * Obter mensagem segura (sem expor dados sensíveis)
+         */
+        getSafeMessage: function(message, type) {
+            // Mensagens padrão amigáveis
+            const defaultMessages = {
+                'error': 'Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.',
+                'warning': 'Atenção: verifique as informações antes de continuar.',
+                'info': 'Informação importante.',
+                'success': 'Operação realizada com sucesso!',
+                'network': 'Não foi possível conectar. Verifique sua conexão com a internet.',
+                'validation': 'Por favor, verifique os dados fornecidos.',
+                'permission': 'Você não tem permissão para realizar esta ação.',
+                'notfound': 'O item solicitado não foi encontrado.'
+            };
+            
+            // Se houver mensagem customizada, sanear
+            if (message) {
+                // Remover dados sensíveis
+                message = message
+                    .replace(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g, '[IP]')
+                    .replace(/[\w\.-]+@[\w\.-]+\.\w+/g, '[EMAIL]')
+                    .replace(/password|senha|token|key|secret/gi, '[REMOVED]');
+                
+                return message;
+            }
+            
+            return defaultMessages[type] || defaultMessages['error'];
+        },
+        
+        /**
+         * Formatar detalhes técnicos
+         */
+        formatDetails: function(details) {
+            if (typeof details === 'string') {
+                return details;
+            }
+            
+            if (typeof details === 'object') {
+                return JSON.stringify(details, null, 2);
+            }
+            
+            return String(details);
+        },
+        
+        /**
+         * Verificar se está em desenvolvimento
+         */
+        isDevelopment: function() {
+            return window.location.hostname === 'localhost' ||
+                   window.location.hostname === '127.0.0.1' ||
+                   window.location.hostname.includes('dev');
+        },
+        
+        /**
+         * Log de erro para auditoria
+         */
+        logError: function(options, type) {
+            // Enviar para servidor (opcional)
+            if (options.log !== false) {
+                fetch('/php/error_logger.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({
+                        type: type,
+                        message: options.message,
+                        url: window.location.href,
+                        timestamp: new Date().toISOString(),
+                        userAgent: navigator.userAgent
+                    })
+                }).catch(e => console.error('Erro ao logar erro:', e));
+            }
+        }
+    };
+    
+    // Event Listeners
+    ErrorDialog.elements.closeBtn.addEventListener('click', () => ErrorDialog.close());
+    ErrorDialog.elements.detailsToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        ErrorDialog.elements.details.classList.toggle('show');
+        ErrorDialog.elements.detailsToggle.textContent = 
+            ErrorDialog.elements.details.classList.contains('show') 
+                ? 'Ocultar detalhes' 
+                : 'Mostrar detalhes técnicos';
+    });
+    
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && ErrorDialog.elements.modal.classList.contains('active')) {
+            ErrorDialog.close();
+        }
+    });
+    
+    // Fechar ao clicar fora
+    ErrorDialog.elements.modal.addEventListener('click', (e) => {
+        if (e.target === ErrorDialog.elements.modal) {
+            ErrorDialog.close();
+        }
+    });
+    
+    // Capturar erros globais
+    window.addEventListener('error', (event) => {
+        ErrorDialog.show({
+            type: 'error',
+            title: 'Erro de Aplicação',
+            message: event.message || 'Erro inesperado',
+            details: {
+                file: event.filename,
+                line: event.lineno,
+                column: event.colno
+            }
+        });
+    });
+    
+    // Capturar rejeições de Promise não capturadas
+    window.addEventListener('unhandledrejection', (event) => {
+        ErrorDialog.show({
+            type: 'error',
+            title: 'Erro Não Tratado',
+            message: event.reason?.message || 'Erro de Promise não capturado',
+            details: event.reason
+        });
+    });
+    
+    // Expor globalmente
+    window.ErrorDialog = ErrorDialog;
+})();
+</script>

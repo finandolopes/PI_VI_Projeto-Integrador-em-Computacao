@@ -1,0 +1,99 @@
+﻿/* Bootstrap 5 compatibility fixes for public layout */
+html, body {
+  overflow-x: hidden;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Botões: display flex apenas para botões reais, sem forçar min-height */
+.btn,
+button.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+/* Botão de fechar (bootstrap) não deve ter min-height herdado */
+.btn-close {
+  min-width: unset;
+  min-height: unset;
+  padding: 0.25rem;
+}
+
+/* Mobile nav toggle: tamanho controlado pelo próprio estilo */
+.mobile-nav-toggle {
+  min-width: unset;
+  min-height: unset;
+  line-height: 1;
+  padding: 6px 8px;
+}
+
+/* Modais */
+.modal {
+  z-index: 1060;
+}
+.modal-backdrop {
+  z-index: 1050;
+}
+
+/* Bootstrap 4 → 5: .form-row equivale a .row com gutter pequeno */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+.form-row > .col,
+.form-row > [class*="col-"] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+/* Navbar no header alinha verticalmente */
+#header .navbar ul {
+  align-items: center;
+}
+
+#header .navbar .nav-link.btn.btn-link {
+  text-decoration: none;
+  line-height: 1.2;
+  color: inherit;
+  padding-left: 30px;
+}
+
+/* Back-to-top: não herda min-height de button */
+.back-to-top {
+  min-width: unset;
+  min-height: unset;
+}
+
+/* Swiper pagination bullets */
+.swiper-pagination-bullet {
+  cursor: pointer;
+}
+
+/* Carousel indicators (ol → compatibilidade BS5) */
+#hero .carousel-indicators li {
+  box-sizing: content-box;
+  width: 30px;
+  height: 3px;
+  border-radius: 0;
+  background-color: #fff;
+  opacity: 0.5;
+  transition: opacity 0.6s ease;
+  cursor: pointer;
+}
+
+#hero .carousel-indicators li.active {
+  opacity: 1;
+}
+
+@media (max-width: 991px) {
+  #header .navbar ul {
+    gap: 0.25rem;
+  }
+}

@@ -1,0 +1,124 @@
+# =====================================================
+# CONFINTER - Dockerfile Otimizado
+# Imagem personalizada para o container web
+# Data: 07/02/2026 - VERSÃO OTIMIZADA
+# =====================================================
+
+FROM php:8.1-apache AS base
+
+# ========== LABELS ==========
+LABEL maintainer="seu-email@seudominio.com"
+LABEL description="CONFINTER - Sistema de Análise e Visualização de Dados"
+LABEL version="2.0.0"
+
+# ========== VARIÁVEIS DE BUILD ==========
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PHP_MEMORY_LIMIT=256M
+ENV PHP_UPLOAD_MAX_FILESIZE=50M
+ENV PHP_POST_MAX_SIZE=50M
+
+# ========== INSTALAR DEPENDÊNCIAS ==========
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libzip-dev \
+    libonig-dev \
+    libxml2-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    git \
+    unzip \
+    curl \
+    ca-certificates \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+    pdo_mysql \
+    mysqli \
+    gd \
+    zip \
+    mbstring \
+    xml \
+    curl \
+    intl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# ========== INSTALAR COMPOSER ==========
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && chmod +x /usr/local/bin/composer
+
+# ========== CONFIGURAR APACHE ==========
+RUN a2enmod rewrite headers ssl env mime \
+    && a2dismod mpm_prefork \
+    && a2enmod mpm_event
+
+# ========== CRIAR USUÁRIO NÃO-ROOT ==========
+RUN useradd -m -s /sbin/nologin www-app
+
+# ========== DIRETÓRIO DE TRABALHO ==========
+WORKDIR /var/www/html
+
+# ========== COPIAR ARQUIVOS DE CONFIGURAÇÃO ==========
+COPY --chown=www-data:www-data docker/php.ini /usr/local/etc/php/php.ini
+COPY --chown=www-data:www-data docker/apache.conf /etc/apache2/sites-available/000-default.conf
+COPY --chown=www-data:www-data docker/apache.conf /etc/apache2/sites-enabled/000-default.conf
+
+# ========== CONFIGURAR PERMISSÕES ==========
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 750 /var/www/html \
+    && mkdir -p /var/log/apache2 \
+    && chown -R www-data:www-data /var/log/apache2 \
+    && chmod -R 755 /var/log/apache2
+
+# ========== CRIAR DIRETÓRIOS NECESSÁRIOS ==========
+RUN mkdir -p /var/www/html/logs \
+    && mkdir -p /var/www/html/cache \
+    && mkdir -p /var/www/html/temp \
+    && mkdir -p /var/www/html/assets/uploads \
+    && chown -R www-data:www-data /var/www/html/logs \
+    && chown -R www-data:www-data /var/www/html/cache \
+    && chown -R www-data:www-data /var/www/html/temp \
+    && chown -R www-data:www-data /var/www/html/assets/uploads \
+    && chmod -R 755 /var/www/html/assets/uploads
+
+# ========== HEALTHCHECK ==========
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost/index.php || exit 1
+
+# ========== EXPOR PORTAS ==========
+EXPOSE 80
+
+# ========== USUARIO PADRÃO ==========
+USER www-data
+
+# ========== ENTRYPOINT ==========
+CMD ["apache2-foreground"]
+
+# =====================================================
+# MULTI-STAGE PARA OTIMIZAÇÃO (OPCIONAL)
+# =====================================================
+# Para versão otimizada, descomente abaixo:
+#
+# FROM base as production
+# 
+# # Remover arquivos desnecessários
+# RUN rm -rf /var/www/html/.git \
+#     && rm -rf /var/www/html/.gitignore \
+#     && rm -rf /var/www/html/.env* \
+#     && rm -rf /var/www/html/tests \
+#     && rm -rf /var/www/html/docker/
+#
+# # Executar apenas apache
+# CMD ["apache2-foreground"]
+#
+# =====================================================
+# INSTRUÇÕES DE BUILD
+# =====================================================
+# docker build -t confinter:latest .
+# docker build -t confinter:2.0.0 .
+#
+# VERIFICAR SEGURANÇA:
+# docker scan confinter:latest
+#
+# =====================================================

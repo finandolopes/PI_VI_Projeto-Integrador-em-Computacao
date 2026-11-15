@@ -1,0 +1,685 @@
+/* ========================================
+   MELHORIAS DE UI/UX - CSS
+   Estilos para melhor experiência do usuário
+   ======================================== */
+
+/* ==========================================
+   1. VARIÁVEIS CSS (Design System)
+   ========================================== */
+
+:root {
+    /* Cores principais */
+    --primary: #007bff;
+    --primary-dark: #0056b3;
+    --primary-light: #e7f1ff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --info: #17a2b8;
+    
+    /* Neutros */
+    --white: #ffffff;
+    --gray-light: #f8f9fa;
+    --gray-medium: #e9ecef;
+    --gray-dark: #495057;
+    --black: #212529;
+    
+    /* Sombras */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.15);
+    
+    /* Espaçamento */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Tipografia */
+    --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --border-radius-xl: 16px;
+    
+    /* Transições */
+    --transition-fast: 0.15s ease-in-out;
+    --transition-normal: 0.3s ease-in-out;
+    --transition-slow: 0.5s ease-in-out;
+}
+
+/* ==========================================
+   2. RESETS E BASE
+   ========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--gray-dark);
+    background: var(--white);
+    line-height: 1.6;
+}
+
+/* ==========================================
+   3. LOGIN MODAL - MELHORIAS
+   ========================================== */
+
+.modal-login .modal-content {
+    border: none;
+    box-shadow: var(--shadow-xl);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+}
+
+.modal-login .modal-body {
+    padding: 2rem;
+}
+
+.login-logo {
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 2rem;
+    animation: slideInDown 0.5s ease-out;
+}
+
+.modal-login .form-outline {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.modal-login .form-control {
+    background: var(--gray-light);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all var(--transition-normal);
+}
+
+.modal-login .form-control:focus {
+    background: var(--white);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.modal-login .form-label {
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all var(--transition-fast);
+    pointer-events: none;
+}
+
+.modal-login .form-control:focus ~ .form-label,
+.modal-login .form-control:not(:placeholder-shown) ~ .form-label {
+    opacity: 1;
+    transform: translateY(-30px);
+}
+
+/* Loading spinner no botão */
+.btn-login-loading {
+    position: relative;
+}
+
+.btn-login-loading.loading {
+    color: transparent;
+}
+
+.btn-login-loading.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--white);
+    animation: spin 0.6s linear infinite;
+}
+
+/* Mensagem de erro melhorada */
+#loginError {
+    border-radius: var(--border-radius-md);
+    border: none;
+    background: #ffe7e7;
+    color: #721c24;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    animation: slideInUp 0.3s ease-out;
+}
+
+#loginError::before {
+    content: '⚠';
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   4. CARDS - MELHORIAS
+   ========================================== */
+
+.card {
+    border: none;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--primary-light), rgba(0, 123, 255, 0.05));
+    border-bottom: 2px solid var(--primary);
+    padding: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+.card-title {
+    color: var(--primary-dark);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* ==========================================
+   5. DASHBOARD CARDS - STATSTICS
+   ========================================== */
+
+.dash-count {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all var(--transition-normal);
+    border-left: 4px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.dash-count::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.dash-count:hover::before {
+    opacity: 1;
+}
+
+.dash-count:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.dash-count.das1 {
+    border-left-color: var(--success);
+}
+
+.dash-count.das2 {
+    border-left-color: var(--warning);
+}
+
+.dash-count.das3 {
+    border-left-color: var(--info);
+}
+
+.dash-counts h3 {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-dark);
+    margin: 0 0 0.5rem 0;
+}
+
+.dash-counts h5 {
+    font-size: 0.9rem;
+    color: var(--gray-dark);
+    margin: 0;
+    font-weight: var(--font-weight-normal);
+}
+
+.dash-counts small {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.dash-imgs {
+    font-size: 3rem;
+    color: rgba(0, 123, 255, 0.1);
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   6. TABELAS - MELHORIAS
+   ========================================== */
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: linear-gradient(135deg, var(--gray-light), var(--gray-medium));
+    border-bottom: 2px solid #dee2e6;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    transition: all var(--transition-fast);
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.table tbody tr:hover {
+    background: var(--gray-light);
+    box-shadow: inset 0 0 0 999px rgba(0, 123, 255, 0.02);
+}
+
+.table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    color: var(--gray-dark);
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-approved {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-rejected {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-processing {
+    background: #cfe2ff;
+    color: #084298;
+    position: relative;
+    animation: pulse 2s infinite;
+}
+
+/* ==========================================
+   7. BOTÕES - MELHORIAS
+   ========================================== */
+
+.btn {
+    border-radius: var(--border-radius-md);
+    font-weight: var(--font-weight-semibold);
+    padding: 0.6rem 1.2rem;
+    transition: all var(--transition-normal);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark), #004085);
+}
+
+.btn-outline-light {
+    border: 2px solid var(--white);
+    color: var(--white);
+    background: transparent;
+}
+
+.btn-outline-light:hover {
+    background: var(--white);
+    color: var(--primary);
+}
+
+/* ==========================================
+   8. FORMULÁRIOS - MELHORIAS
+   ========================================== */
+
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius-md);
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+    font-family: var(--font-family);
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    background: var(--white);
+}
+
+.form-control.is-invalid {
+    border-color: var(--danger);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='12 12 24 24'%3e%3ccircle cx='24' cy='24' r='11' fill='%23dc3545'/%3e%3cpath fill='%23fff' d='M24 18c-1.1 0-2 .9-2 2v2h4v-2c0-1.1-.9-2-2-2zm0 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 4px;
+    border: 2px solid #dee2e6;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* ==========================================
+   9. VALIDAÇÃO DE FORMULÁRIO
+   ========================================== */
+
+.form-text.invalid-feedback {
+    display: block;
+    color: var(--danger);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    animation: slideInUp 0.2s ease-out;
+}
+
+.form-text.valid-feedback {
+    display: block;
+    color: var(--success);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    animation: slideInUp 0.2s ease-out;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon::after {
+    content: '✓';
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--success);
+    font-weight: bold;
+    display: none;
+}
+
+.input-icon.is-valid::after {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ==========================================
+   10. ALERTAS - MELHORIAS
+   ========================================== */
+
+.alert {
+    border: none;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    animation: slideInDown 0.3s ease-out;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border-left: 4px solid var(--success);
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid var(--danger);
+}
+
+.alert-warning {
+    background: #fff3cd;
+    color: #856404;
+    border-left: 4px solid var(--warning);
+}
+
+.alert-info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border-left: 4px solid var(--info);
+}
+
+/* ==========================================
+   11. ANIMAÇÕES
+   ========================================== */
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ==========================================
+   12. RESPONSIVIDADE
+   ========================================== */
+
+@media (max-width: 768px) {
+    :root {
+        font-size: 14px;
+    }
+    
+    .modal-login .modal-body {
+        padding: 1rem;
+    }
+    
+    .login-logo {
+        max-width: 150px;
+    }
+    
+    .dash-count {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    .dash-imgs {
+        margin-top: 1rem;
+    }
+    
+    .table {
+        font-size: 0.9rem;
+    }
+    
+    .table thead th,
+    .table tbody td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        font-size: 13px;
+    }
+    
+    .modal-login .modal-body {
+        padding: 0.75rem;
+    }
+    
+    .dash-counts h3 {
+        font-size: 1.5rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+}
+
+/* ==========================================
+   13. ACESSIBILIDADE
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --white: #1e1e1e;
+        --gray-light: #2d2d2d;
+        --gray-medium: #3d3d3d;
+        --gray-dark: #e0e0e0;
+        --black: #f5f5f5;
+    }
+    
+    body {
+        background: #1a1a1a;
+        color: var(--gray-dark);
+    }
+}
+
+/* Focus visível para navegação por teclado */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   FIM DO CSS
+   ======================================== */

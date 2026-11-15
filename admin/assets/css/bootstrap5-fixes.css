@@ -1,0 +1,33 @@
+﻿/* Bootstrap 5 compatibility fixes for admin layout */
+body {
+  overflow-x: hidden;
+}
+
+.page-wrapper {
+  min-height: calc(100vh - 60px);
+}
+
+.card {
+  border-radius: 0.75rem;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.btn,
+button.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.form-control,
+.form-select {
+  min-height: 42px;
+}
+
+.alert {
+  border-radius: 0.65rem;
+}

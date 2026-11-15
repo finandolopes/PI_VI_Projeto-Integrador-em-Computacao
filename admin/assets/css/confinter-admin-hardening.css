@@ -1,0 +1,7 @@
+/* Incremental UI improvements; original admin layout preserved. */
+:where(a,button,input,select,textarea):focus-visible{outline:3px solid #1872c7!important;outline-offset:2px}
+.page-wrapper img{max-width:100%;height:auto}
+.table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.form-control,.form-select{max-width:100%}
+@media(max-width:600px){.page-wrapper .content{padding:14px!important}.page-header h3{font-size:1.35rem}.card-body{padding:14px}.page-wrapper .row>[class*=col-]{min-width:0}}
+@media(prefers-reduced-motion:reduce){.page-wrapper *, .sidebar *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}

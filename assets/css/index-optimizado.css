@@ -1,0 +1,783 @@
+/**
+ * CONFINTER - Estilos Otimizados
+ * Acessibilidade, Performance e UX Melhorados
+ */
+
+/* ============================================
+   VARIÁVEIS E BASE
+   ============================================ */
+:root {
+    --primary-color: #007bff;
+    --danger-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --dark-color: #333;
+    --light-color: #f8f9fa;
+    --focus-outline: 3px solid #007bff;
+    --transition-smooth: all 0.3s ease-in-out;
+}
+
+/* ============================================
+   ACESSIBILIDADE - SKIP LINK
+   ============================================ */
+.skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 1100;
+    border-radius: 0 0 4px 0;
+    font-weight: 600;
+}
+
+.skip-to-main:focus {
+    top: 0;
+}
+
+/* Focus visível para navegação por teclado */
+:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+}
+
+/* Keyboard navigation focus */
+.keyboard-nav *:focus-visible {
+    outline: 3px solid var(--primary-color) !important;
+    outline-offset: 2px;
+}
+
+/* Contrast */
+.text-muted {
+    color: #666666 !important;
+}
+
+/* Minimum touch target - apenas para elementos de formulário, NÃO botões do layout */
+input[type="checkbox"],
+input[type="radio"] {
+    min-width: 20px;
+    min-height: 20px;
+}
+
+/* ============================================
+   ACESSIBILIDADE - MODO ESCURO
+   ============================================ */
+.darkmode-white-text {
+    color: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+    .darkmode-white-text {
+        color: #f0f0f0;
+    }
+    
+    body {
+        background-color: #1a1a1a;
+        color: #f0f0f0;
+    }
+}
+
+/* ============================================
+   HEADER E NAVEGAÇÃO
+   ============================================ */
+
+#header {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: var(--transition-smooth);
+}
+
+#header.header-scrolled {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.navbar ul li a {
+    font-size: 15px;
+    font-weight: 500;
+    color: #222;
+    white-space: nowrap;
+    transition: var(--transition-smooth);
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+
+.navbar ul li a:hover,
+.navbar ul li a.active {
+    color: var(--primary-color);
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Mobile Nav Toggle */
+.mobile-nav-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #222;
+    transition: var(--transition-smooth);
+}
+
+@media (max-width: 991px) {
+    .mobile-nav-toggle {
+        display: block;
+    }
+    
+    .navbar {
+        position: fixed;
+        overflow-y: auto;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar.active {
+        left: 0;
+    }
+    
+    .navbar ul {
+        padding: 0;
+    }
+}
+
+/* ============================================
+   MODAL LOGIN - MELHORADO
+   ============================================ */
+
+.modal-login {
+    backdrop-filter: blur(5px);
+}
+
+.modal-login .modal-content {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+.modal-login .form-outline input,
+.modal-login .form-outline select {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 15px;
+    transition: var(--transition-smooth);
+}
+
+.modal-login .form-outline input:focus,
+.modal-login .form-outline select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.modal-login .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.login-logo {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.modal-login .btn-primary {
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: var(--transition-smooth);
+}
+
+.modal-login .btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.modal-login .form-check-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.modal-login a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.modal-login a:hover {
+    text-decoration: underline;
+}
+
+/* Modal mobile fullscreen */
+@media (max-width: 768px) {
+    .modal-login .modal-dialog {
+        max-width: 100%;
+        margin: 0;
+    }
+    .modal-login .modal-content {
+        border-radius: 0;
+        min-height: 100vh;
+    }
+    .modal-login .modal-body {
+        padding: 2rem;
+    }
+    .h-custom {
+        height: 100%;
+    }
+    .modal-login .btn-primary {
+        width: 100%;
+    }
+}
+
+@media (min-width: 769px) {
+    .h-custom {
+        height: calc(100% - 73px);
+    }
+}
+
+/* Divider */
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+/* ============================================
+   SEÇÃO HERO/CAROUSEL
+   ============================================ */
+
+.carousel-item {
+    height: 100vh;
+    min-height: 400px;
+    background: no-repeat center center scroll;
+    background-size: cover;
+    position: relative;
+}
+
+.carousel-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.carousel-container .container {
+    text-align: center;
+    color: white;
+}
+
+.carousel-container h2,
+.carousel-container p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: var(--transition-smooth);
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   SEÇÕES DE CONTEÚDO
+   ============================================ */
+
+.section-title,
+.section-headline {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.section-title h2,
+.section-headline h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.section-title h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    margin: 15px auto 0;
+}
+
+/* ============================================
+   CARDS DE SERVIÇOS
+   ============================================ */
+
+.single-services {
+    margin-bottom: 30px;
+    transition: var(--transition-smooth);
+}
+
+.service-box {
+    padding: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: var(--transition-smooth);
+    height: 100%;
+}
+
+.service-box:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+}
+
+.service-box i {
+    font-size: 60px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    transition: var(--transition-smooth);
+    display: block;
+}
+
+.service-box:hover i {
+    color: #0056b3;
+    transform: scale(1.1);
+}
+
+.service-box h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 15px 0 10px;
+    color: #222;
+}
+
+.service-box p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* ============================================
+   FORMULÁRIOS
+   ============================================ */
+
+.form-control,
+.form-select {
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-size: 14px;
+    transition: var(--transition-smooth);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-check-input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* ============================================
+   BOTÕES
+   ============================================ */
+
+.btn {
+    padding: 10px 25px;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:focus-visible {
+    outline-offset: 2px;
+}
+
+/* ============================================
+   SEÇÃO FAQ
+   ============================================ */
+
+.faq-list {
+    list-style: none;
+    padding: 0;
+}
+
+.faq-list li {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background: white;
+    transition: var(--transition-smooth);
+    display: block;
+}
+
+.faq-list li:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.faq-list a {
+    color: #222;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition-smooth);
+    width: 100%;
+}
+
+.faq-list a:hover {
+    color: var(--primary-color);
+}
+
+.faq-list .collapse {
+    margin-top: 10px;
+}
+
+.faq-list p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ============================================
+   MENU FLUTUANTE (gerenciado por floating-buttons-enhanced.js)
+   ============================================ */
+
+.floating-buttons {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    left: auto;
+    top: auto;
+    transform: none;
+    z-index: 990;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: auto;
+    padding: 0;
+    border-radius: 0;
+}
+
+.floating-buttons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    color: white;
+    font-size: 22px;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    text-decoration: none;
+    margin-bottom: 0;
+}
+
+.floating-buttons .whatsapp { background-color: #25d366; }
+.floating-buttons .whatsapp:hover { background-color: #20ba5a; transform: scale(1.1); }
+
+.floating-buttons .instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+.floating-buttons .instagram:hover { transform: scale(1.1); }
+
+.floating-buttons .email { background-color: #4285F4; }
+.floating-buttons .email:hover { background-color: #3367d6; transform: scale(1.1); }
+
+@media (max-width: 768px) {
+    .floating-buttons {
+        bottom: 90px;
+        right: 16px;
+    }
+    .floating-buttons a {
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+    }
+}
+
+/* ============================================
+   BARRA CTA MOBILE
+   ============================================ */
+
+.mobile-cta-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 998;
+    display: none;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-cta-bar .btn { flex: 1; font-weight: 600; }
+
+@media (max-width: 768px) {
+    .mobile-cta-bar { display: flex; }
+    body { padding-bottom: 74px; }
+}
+
+/* ============================================
+   MODAL GENÉRICO
+   ============================================ */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    backdrop-filter: blur(3px);
+}
+
+.modal-overlay.active {
+    display: block;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    padding: 40px 0 20px;
+    margin-top: 40px;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ============================================
+   ANIMAÇÕES
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate__animated.animate__fadeInUp {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* ============================================
+   RESPONSIVO GERAL
+   ============================================ */
+
+@media (max-width: 768px) {
+    .section-title h2,
+    .section-headline h2 {
+        font-size: 1.8rem;
+    }
+    
+    .carousel-container h2,
+    .carousel-container p {
+        font-size: 1.5rem;
+    }
+    
+    .form-row {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .form-group.col-md-4,
+    .form-group.col-md-2 {
+        width: 100% !important;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title h2,
+    .section-headline h2 {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-container h2,
+    .carousel-container p {
+        font-size: 1.2rem;
+    }
+    
+    .floating-buttons {
+        gap: 10px;
+    }
+    
+    .floating-buttons a {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+/* ============================================
+   PERFORMANCE - LAZY LOADING
+   ============================================ */
+
+img[loading="lazy"] {
+    background: #f0f0f0;
+}
+
+/* ============================================
+   ACESSIBILIDADE - MOVIMENTO REDUZIDO
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   MODO PRINT
+   ============================================ */
+
+@media print {
+    .floating-buttons,
+    .mobile-nav-toggle,
+    .mobile-cta-bar,
+    footer {
+        display: none;
+    }
+    
+    body {
+        font-size: 12pt;
+        color: black;
+        padding-bottom: 0;
+    }
+}
+
+/* ============================================
+   COMPONENTES - MAPA DE CONTATO
+   ============================================ */
+
+.contact-map {
+    border: 0;
+    width: 100%;
+    height: 270px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .contact-map {
+        height: 220px;
+    }
+}
+
+/* ============================================
+   FORM SUCCESS/ERROR
+   ============================================ */
+
+#form-requisicao-success,
+#form-requisicao-error {
+    border-left: 4px solid;
+}
+
+#form-requisicao-success { border-left-color: #198754; }
+#form-requisicao-error   { border-left-color: #dc3545; }

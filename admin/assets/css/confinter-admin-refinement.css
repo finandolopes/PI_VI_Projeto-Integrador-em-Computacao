@@ -1,0 +1,16 @@
+/* CONFINTER Admin refinement: visual only, preserves legacy forms and navigation */
+:root{--cf-admin-blue:#17589a;--cf-admin-dark:#0c2847;--cf-admin-border:#dbe5ee}
+body{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+.page-wrapper .content{max-width:1700px}
+.page-wrapper .page-header{margin-bottom:22px}
+.page-title{letter-spacing:-.025em;font-weight:700}
+.page-wrapper .card,.page-wrapper .iot-step,.page-wrapper .iot-kpi{border:1px solid var(--cf-admin-border);border-radius:12px;box-shadow:0 3px 12px rgba(12,40,71,.035)}
+.page-wrapper .card-header{background:transparent;border-bottom:1px solid #e6edf3;padding:16px 20px}
+.page-wrapper .card-body{padding:20px}
+.page-wrapper .table th{background:#eff5f9;color:#26415e;font-weight:650}
+.page-wrapper .table td{vertical-align:middle}
+.page-wrapper .form-control,.page-wrapper .form-select{min-height:42px;border-color:#cbd8e5}
+.page-wrapper .btn{min-height:39px;border-radius:8px}
+.page-wrapper .btn:focus-visible,.page-wrapper a:focus-visible,.page-wrapper :is(input,select,textarea):focus-visible{outline:3px solid #e1aa39;outline-offset:2px}
+.page-wrapper .badge{font-weight:600}
+@media(max-width:767px){.page-wrapper .content{padding:16px}.page-wrapper .card-body{padding:14px}.page-wrapper .page-title{font-size:1.4rem}.page-wrapper .table-responsive{max-width:100%;overflow-x:auto}}
