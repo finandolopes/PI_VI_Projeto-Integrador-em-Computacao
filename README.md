@@ -1,12 +1,10 @@
 # CONFINTER — Projeto Integrador VI (2026/2)
 
-Projeto acadêmico e aplicação web **CONFINTER**, com portal institucional, recursos 3D, central de chamados (Service Desk), integração IoT com ESP32 e painel de gestão.
-
-**Versão do código:** V7. **Homologação:** realizada pelo responsável pelo projeto; as evidências dos testes reais não estão reproduzidas neste repositório.
+Projeto acadêmico e aplicação web **CONFINTER**, com portal institucional, central de chamados (Service Desk), integração IoT com ESP32 e painel de gestão.
 
 ## Visão do projeto
 
-- Portal institucional responsivo, com assets 3D/GLB e recursos de acessibilidade
+- Portal institucional responsivo, com assets  e recursos de acessibilidade
 - Service Desk com abertura, consulta e acompanhamento de chamados
 - Integração de dispositivos IoT com API e regras de abertura de incidentes
 - Administração com indicadores, notificações, pesquisa e módulos operacionais
@@ -37,6 +35,3 @@ Consulte `entrega_pi_vi/V7_IMPLANTACAO_E_HOMOLOGACAO.md` para instruções adici
 
 Este repositório contém código e assets, **sem** banco de clientes, credenciais reais, documentos acadêmicos privados, backups ou históricos internos de desenvolvimento. Não faça commit de `.env`, logs, cadastros reais ou prints de painéis com dados pessoais. Scripts legados com credenciais embutidas foram excluídos do pacote público; confirme os fluxos de e-mail antes de implantá-lo a partir desta distribuição.
 
-## Observação
-
-A homologação foi informada pelo responsável. As capturas aqui incluídas foram recuperadas do pacote entregue, não capturadas novamente do sistema publicado.
