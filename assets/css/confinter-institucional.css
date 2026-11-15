@@ -1,0 +1,35 @@
+/* Institutional presentation inspired by PI V. No WebGL dependency on the home. */
+html{scroll-padding-top:110px}
+header{top:0;backdrop-filter:none;background:#fff;box-shadow:0 2px 12px #1238580d}
+header .bar{max-width:1240px;min-height:88px}
+.logo{width:165px}.nav a{font-size:12px;border-radius:4px}.nav a:hover{transform:none;box-shadow:none}
+.hero{margin-top:88px;height:auto;min-height:600px;perspective:none;background:#07305a}
+.hero-bg{inset:0;background-image:url('../media/v7/institucional_02.webp');background-position:center;background-size:cover;filter:none;transform:none;opacity:.23}
+.hero:before{background:linear-gradient(90deg,#062d58f5,#062d58ab)}
+.hero .inner{max-width:1240px;padding:90px 32px;grid-template-columns:minmax(0,1.4fr) minmax(300px,.8fr);gap:80px}
+.hero-copy>*{animation:none}.hero-copy h1{font-size:clamp(36px,4.3vw,62px);line-height:1.13;letter-spacing:-.035em;margin:24px 0}
+.hero-copy p{font-size:18px;line-height:1.75}.hero-copy .hero-caption{font-size:13px;color:#c6d6e7;margin-top:24px}
+.badge{border:0;padding:0;letter-spacing:.13em;background:none;color:#f5ca68}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:6px;box-shadow:none;padding:13px 20px;font-weight:700;font-size:14px}
+.pill:hover{transform:none;box-shadow:none}.pill.secondary{box-shadow:none}
+.support-card{background:#fff;color:#153250;border-radius:10px;padding:32px;box-shadow:0 16px 40px #001c3630;border-top:4px solid #e5b33e}
+.support-card h2{font-size:28px;line-height:1.2;margin:16px 0}.support-card p{font-size:15px;color:#5c7187}
+.support-link{display:flex;align-items:center;justify-content:space-between;gap:16px;color:#084e97;font-weight:750;padding:18px 0;border-bottom:1px solid #dde7ef}
+.support-steps{display:grid;gap:10px;padding-top:20px;font-size:12px;color:#5c7187}
+.section{padding:76px 0}.section h2{font-size:clamp(28px,3.2vw,42px);letter-spacing:-.025em}.section p.lead{font-size:17px}
+.two{gap:48px}.tilt,.tilt>*,.tilt h3,.tile .symbol,.faq-item:hover{transform:none!important}
+.tile,.quote,.form-panel,.faq-item{border-radius:8px;box-shadow:none}.tile{min-height:220px}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tile .symbol{box-shadow:none;border-radius:8px;font-size:24px}.tile a,.text-link{display:inline-block;color:#075a96;font-size:14px;font-weight:700;margin-top:18px}
+.services{background:#fff}.services .tile{background:#f6f9fc}.section-intro{margin-bottom:32px}
+.depth-stack{height:260px;perspective:none;display:grid;align-content:center;gap:0;border-left:3px solid #e6b43f;padding-left:30px}
+.depth-stack .panel{position:static;width:auto;height:auto;text-align:left;padding:14px 0;background:none!important;color:#084e97!important;box-shadow:none;transform:none!important;animation:none;border-radius:0;font-size:20px}
+.depth-stack .panel.front{border-top:1px solid #d4e2ef;margin-top:8px}
+.stage{background:#07305a}.stage h2{color:#fff}.stage-flow button{transform:none!important;border-radius:8px;box-shadow:none;min-height:145px}.stage-flow .emoji{font-size:28px}.stage-flow button:not(:last-child):after{display:none}
+.has-observer .reveal{opacity:1;transform:none;transition:none}
+.form-panel form{display:block}.form-panel label{display:block;font-size:14px;font-weight:650;margin-top:12px}.form-panel input:not([type=checkbox]):not([type=hidden]),.form-panel select,.form-panel textarea{display:block;width:100%;padding:11px 12px;border:1px solid #b9cddd;border-radius:5px;background:#fff;min-height:44px}.form-panel button{margin-top:16px}.form-group{margin-bottom:12px}
+.contact-links{display:grid;gap:0}.contact-links a{padding:18px 0;border-bottom:1px solid #d5e3ee;font-weight:750}.contact-links span{display:block;font-size:14px;font-weight:400;color:#54708a;margin-top:5px}
+.social{top:auto;bottom:24px;right:16px;gap:6px}.social a{width:36px;height:36px;border-radius:50%;font-size:16px;box-shadow:none}.social a:hover{transform:none}
+#progress{display:none}.values{background:#eef4fa}.form-group.col-md-4,.form-group.col-md-2{max-width:100%}
+@media(max-width:1100px){header .bar{padding:14px 20px}.nav{gap:0}.nav a{padding:9px 6px;font-size:11px}.hero .inner{gap:36px}.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:780px){html{scroll-padding-top:88px}header .bar{min-height:76px}.hero{margin-top:76px;min-height:0}.hero .inner{grid-template-columns:1fr;padding:48px 24px;gap:32px}.hero-copy h1{font-size:40px}.support-card{padding:24px}.hero-copy p{font-size:16px}.two{grid-template-columns:1fr;gap:28px}.section{padding:52px 0}.nav.open{display:grid;grid-template-columns:1fr 1fr}.nav a{font-size:13px;padding:12px}.depth-stack{height:auto}.social{bottom:12px;right:8px}.container{width:calc(100% - 40px)}}
+@media(max-width:480px){.hero-copy h1{font-size:34px}.hero-actions{display:grid}.hero-actions a{width:100%}.grid-4{grid-template-columns:1fr}.form-panel{padding:22px}.stage-flow{grid-template-columns:1fr}.section h2{font-size:29px}.badge{font-size:10px;letter-spacing:.08em}}
